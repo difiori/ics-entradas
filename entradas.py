@@ -1,9 +1,16 @@
 import requests
 import json
+import os  # Para gerenciar variáveis de ambiente
 from ics import Calendar, Event
 
+# Carrega a chave API do Notion das variáveis de ambiente (definida no GitHub Actions)
+NOTION_API_KEY = os.getenv('NOTION_API_KEY')
+
+# Verifica se a variável de ambiente foi carregada corretamente
+if NOTION_API_KEY is None:
+    raise ValueError("A chave API do Notion não foi encontrada. Verifique se o secret NOTION_API_KEY foi definido corretamente.")
+
 # Configuração de autenticação do Notion API
-NOTION_API_KEY = 'secret_XORa2y02Ll03dMruX1tmpAovFwFTND3F7SjZKTQDV17'  # Substitua com sua chave de API do Notion
 HEADERS = {
     'Authorization': f'Bearer {NOTION_API_KEY}',
     'Content-Type': 'application/json',
